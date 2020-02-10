@@ -47,37 +47,38 @@ package leetcode.editor.cn;
 
 public class P376_WiggleSubsequence {
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        P376_WiggleSubsequence problem = new P376_WiggleSubsequence();
+        Solution solution = problem.new Solution();
     }
-}
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int wiggleMaxLength(int[] nums) {
-        if(nums == null || nums.length==0)
-            return 0;
-        if(nums.length<2){
-            return nums.length;
-        }
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int wiggleMaxLength(int[] nums) {
+            if (nums == null || nums.length == 0)
+                return 0;
+            if (nums.length < 2) {
+                return nums.length;
+            }
 
-        int count=1;
+            int count = 1;
 
 
-        for(int i=1, j=0; i<nums.length; j=i, i++){
-            if(nums[j]<nums[i]){
-                count++;
-                while(i<nums.length-1 && nums[i]<=nums[i+1]){
-                    i++;
-                }
-            }else if(nums[j]>nums[i]){
-                count++;
-                while(i<nums.length-1 && nums[i]>=nums[i+1]){
-                    i++;
+            for (int i = 1, j = 0; i < nums.length; j = i, i++) {
+                if (nums[j] < nums[i]) {
+                    count++;
+                    while (i < nums.length - 1 && nums[i] <= nums[i + 1]) {
+                        i++;
+                    }
+                } else if (nums[j] > nums[i]) {
+                    count++;
+                    while (i < nums.length - 1 && nums[i] >= nums[i + 1]) {
+                        i++;
+                    }
                 }
             }
-        }
 
-        return count;
+            return count;
+        }
     }
+    //leetcode submit region end(Prohibit modification and deletion)
 }
-//leetcode submit region end(Prohibit modification and deletion)
