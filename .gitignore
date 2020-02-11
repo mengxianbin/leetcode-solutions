@@ -1,5 +1,12 @@
 .idea
 *.iml
+*.class
+
+# win
+target
+# mac
+out
 
 *.json
 *.md
+*.txt
