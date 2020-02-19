@@ -183,24 +183,30 @@ class Solution {
         List<CharInfo> charInfoList = new ArrayList<>();
         int startInfoIndex = 0;
 
-        Map<Character, Integer> required = strToMap(t);
+        Map<Character, Integer> target = new HashMap<>();
+        for (int tIndex = 0; tIndex < t.length(); tIndex++) {
+            char c = t.charAt(tIndex);
+            int tCount = target.getOrDefault(c, 0) + 1;
+            target.put(c, tCount);
+        }
+
         Map<Character, Integer> window = new HashMap<>();
         int count = 0;
         for (int end = 0; end < s.length(); end++) {
             char endChar = s.charAt(end);
-            if (required.containsKey(endChar)) {
+            if (target.containsKey(endChar)) {
                 int endCount = window.getOrDefault(endChar, 0) + 1;
                 window.put(endChar, endCount);
                 charInfoList.add(new CharInfo(end, endChar));
 
-                if (endCount == required.get(endChar)) {
+                if (endCount == target.get(endChar)) {
                     ++count;
                 }
             } else {
                 continue;
             }
 
-            while (count == required.size()) {
+            while (count == target.size()) {
                 CharInfo startInfo = charInfoList.get(startInfoIndex);
                 if (!result.found || end - startInfo.sIndex < result.end - result.start) {
                     result.found = true;
@@ -211,7 +217,7 @@ class Solution {
                 Character beginChar = s.charAt(startInfo.sIndex);
                 int beginCount = window.get(beginChar) - 1;
                 window.put(beginChar, beginCount);
-                if (beginCount < required.get(beginChar)) {
+                if (beginCount < target.get(beginChar)) {
                     --count;
                 }
 
