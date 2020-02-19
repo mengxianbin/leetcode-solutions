@@ -120,33 +120,33 @@ class Solution {
             return "";
         }
 
-        String result = "";
+        int[] result = {-1, -1, -1};
         int begin = 0;
         int count = 0;
         Map<Character, Integer> window = new HashMap<>();
         for (int end = 0; end < s.length(); end++) {
             char endChar = s.charAt(end);
-            int endRequireCount = required.getOrDefault(endChar, 0);
-            if (endRequireCount > 0) {
+            if (required.containsKey(endChar)) {
                 int endCount = window.getOrDefault(endChar, 0) + 1;
                 window.put(endChar, endCount);
 
-                if (endCount == endRequireCount) {
+                if (endCount == required.get(endChar)) {
                     ++count;
                 }
             }
 
             while (count == required.size()) {
                 Character beginChar = s.charAt(begin);
-                int beginRequireCount = required.getOrDefault(beginChar, 0);
-                if (beginRequireCount > 0) {
-                    if (result.isEmpty() || (end - begin + 1 < result.length())) {
-                        result = s.substring(begin, end + 1);
+                if (required.containsKey(beginChar)) {
+                    if (result[0] < 0 || end - begin < result[2] - result[1]) {
+                        result[0] = end - begin;
+                        result[1] = begin;
+                        result[2] = end;
                     }
 
                     int beginCount = window.get(beginChar) - 1;
                     window.put(beginChar, beginCount);
-                    if (beginCount < beginRequireCount) {
+                    if (beginCount < required.get(beginChar)) {
                         --count;
                     }
                 }
@@ -155,12 +155,77 @@ class Solution {
             }
         }
 
-        return result;
+        return result[0] < 0 ? "" : s.substring(result[1], result[2] + 1);
+    }
+
+
+    public String solve3(String s, String t) {
+        if (t.isEmpty()) {
+            return "";
+        }
+
+        class Result {
+            boolean found = false;
+            int start = -1;
+            int end = -1;
+        }
+        Result result = new Result();
+
+        class CharInfo {
+            int sIndex;
+            char c;
+
+            public CharInfo(int sIndex, char c) {
+                this.sIndex = sIndex;
+                this.c = c;
+            }
+        }
+        List<CharInfo> charInfoList = new ArrayList<>();
+        int startInfoIndex = 0;
+
+        Map<Character, Integer> required = strToMap(t);
+        Map<Character, Integer> window = new HashMap<>();
+        int count = 0;
+        for (int end = 0; end < s.length(); end++) {
+            char endChar = s.charAt(end);
+            if (required.containsKey(endChar)) {
+                int endCount = window.getOrDefault(endChar, 0) + 1;
+                window.put(endChar, endCount);
+                charInfoList.add(new CharInfo(end, endChar));
+
+                if (endCount == required.get(endChar)) {
+                    ++count;
+                }
+            } else {
+                continue;
+            }
+
+            while (count == required.size()) {
+                CharInfo startInfo = charInfoList.get(startInfoIndex);
+                if (!result.found || end - startInfo.sIndex < result.end - result.start) {
+                    result.found = true;
+                    result.start = startInfo.sIndex;
+                    result.end = end;
+                }
+
+                Character beginChar = s.charAt(startInfo.sIndex);
+                int beginCount = window.get(beginChar) - 1;
+                window.put(beginChar, beginCount);
+                if (beginCount < required.get(beginChar)) {
+                    --count;
+                }
+
+                ++startInfoIndex;
+            }
+        }
+
+        return !result.found ? "" : s.substring(result.start, result.end + 1);
     }
 
     public String minWindow(String s, String t) {
 //        return solve1(s, t);
-        return solve2(s, t);
+//        return solve2(s, t);
+        return solve3(s, t);
 //        return Solution1.solve(s, t);
 //        return Solution2.solve(s, t);
     }
