@@ -2,7 +2,7 @@ package others.fibonacci;
 
 import org.junit.jupiter.api.Test;
 
-class TestCases {
+class SolutionTest {
 
     Fibonacci_Matrix fibonacci = new Fibonacci_Matrix();
     Matrix<Integer> matrix = new IntMatrix();
@@ -39,6 +39,30 @@ class TestCases {
         Integer[][] m2 = {{1, 1, 1}, {1, 1, 1}};
         Integer[][] p = matrix.multiply(m1, m2);
         System.out.println(matrix.toString(p));
+    }
+
+    @Test
+    public void testMultiply3() {
+//        Integer[][] m1 = {{3, 2}, {2, 1},};
+        Integer[][] m1 = {{2, 1},};
+        Integer[][] m2 = {{1, 1}, {1, 0},};
+        for (int i = 0; i < 10; i++) {
+            Integer[][] p = matrix.multiply(m1, m2);
+            System.out.println(matrix.toString(p));
+            m1 = p;
+        }
+    }
+
+    @Test
+    public void testPower2() {
+        Integer[][] m1 = {{1, 2},};
+        Integer[][] m2 = {{0, 1}, {1, 1},};
+
+        for (int i = 0; i < 10; i++) {
+            Integer[][] p = matrix.power(m2, i);
+            Integer[][] r = matrix.multiply(m1, p);
+            System.out.println(matrix.toString(r));
+        }
     }
 
     @Test
@@ -133,11 +157,11 @@ abstract class Matrix<E> {
         return res;
     }
 
-    public E[][] power(E[][] data, int p) {
+    public E[][] power(E[][] data, int exponent) {
         E[][] temp = data;
         E[][] result = unit(temp.length);
 
-        for (int bits = p; bits > 0; bits >>= 1) {
+        for (int bits = exponent; bits > 0; bits >>= 1) {
             if ((bits & 1) == 1) {
                 result = multiply(result, temp);
             }
