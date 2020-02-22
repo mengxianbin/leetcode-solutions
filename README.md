@@ -20,8 +20,10 @@ import org.junit.jupiter.api.Test;
 
 class SolutionTest {
 
+    private Solver solver = SolverManager.getSolver();
+
     private void test(Object expected, Object... args) {
-        Object actual = SolutionManager.solver.solve(args);
+        Object actual = solver.solve(args);
         Assertions.assertEquals(expected, actual);
     }
 
@@ -46,8 +48,10 @@ class Solution1 implements Solver {
     }
 }
 
-class SolutionManager {
-    static Solver solver = new Solution1();
+class SolverManager {
+    static Solver getSolver() {
+        return new Solution1();
+    }
 }
 
 ${question.code}
