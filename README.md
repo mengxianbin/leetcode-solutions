@@ -15,46 +15,38 @@ ${question.content}
 
 package leetcode.editor.cn.P${question.frontendQuestionId}_$!velocityTool.camelCaseName(${question.titleSlug});
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions.*;
 
-class SolutionTest {
 
-    private Solver solver = SolverManager.getSolver();
-
-    private void test(Object expected, Object... args) {
-        Object actual = solver.solve(args);
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void test1() {
-    
-        /* ${question.testCase} */
-    
-        test(null, null);
-    }
-}
-
+//leetcode submit region begin(Prohibit modification and deletion)
 interface Solver {
-    Object solve(Object... args);
 }
 
-class Solution1 implements Solver {
-
-    @Override
-    public Object solve(Object... args) {
-        return null;
-    }
-}
-
-class SolverManager {
-    static Solver getSolver() {
-        return new Solution1();
-    }
+class Solver1 implements Solver {
 }
 
 ${question.code}
+
+class SolutionTest {
+
+    private Solution solution = new Solution();
+
+    /**
+     * input: (expected, args...)
+     * solve: solution
+     * assert: equals(expected, actual)  
+     */
+    private void test() {
+        
+    }
+
+    /* ${question.testCase} */
+    @Test
+    public void test1() {
+        test();
+    }
+}
 ```
 
 ---
