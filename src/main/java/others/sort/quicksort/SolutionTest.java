@@ -2,11 +2,10 @@ package others.sort.quicksort;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Random;
-
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 
 public class SolutionTest {
 
@@ -42,6 +41,12 @@ public class SolutionTest {
     @Test
     public void test1() {
         int[] arr = {63, 75, 80, 37, 57, 63, 11, 32, 60, 59,};
+        test(arr);
+    }
+
+    @Test
+    public void test2() {
+        int[] arr = {22, 61, 50, 12, 88, 34, 31, 46, 27, 73,};
         test(arr);
     }
 }

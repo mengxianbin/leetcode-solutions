@@ -30,13 +30,50 @@ class Partition1 implements Partition {
 }
 
 /**
+ * 单向分区：取尾
+ * 确保轴位最后交换
+ */
+class Partition6 implements Partition {
+
+    @Override
+    public int partition(int[] arr, int l, int r) {
+        int v = arr[r];
+        int p = l;
+        for (int i = l; i <= r; i++) {
+            if (arr[i] <= v) {
+                swap(arr, i, p);
+                p++;
+            }
+        }
+
+        return p - 1;
+    }
+}
+
+/**
  * 双向分区
  */
 class Partition2 implements Partition {
 
     @Override
     public int partition(int[] arr, int l, int r) {
-        return 0;
+        int v = arr[l];
+        int p = l;
+        int q = r;
+        for (int i = l + 1; i <= q; ) {
+            if (arr[i] < v) {
+                swap(arr, i, p);
+                p++;
+                i++;
+            } else if (arr[i] > v) {
+                swap(arr, i, q);
+                q--;
+            } else {
+                i++;
+            }
+        }
+
+        return p;
     }
 }
 
@@ -78,7 +115,7 @@ class Partition5 implements Partition {
  */
 public class Solution3 implements QuickSort {
 
-    private Partition partition = new Partition1();
+    private Partition partition = new Partition6();
 
     @Override
     public void sort(int[] arr, int l, int r) {
