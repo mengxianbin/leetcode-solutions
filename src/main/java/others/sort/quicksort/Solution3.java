@@ -211,6 +211,22 @@ class Partition5 implements Partition {
 /**
  * for @Solution5: (l, i-1), (i, r)
  * not for @Solution3: (l, i-1), (i, i), (i+1, r)
+ *
+ * 1. 为保证 p++ 结束时，arr[p] >= pivot, 取 arr[r] 为 pivot
+ * 2. 由 arr[p] >= pivot 判定, arr[p] 归右区间, 即 (p, r)
+ * 3. 为使 (p, r) == (l, r) 不成立, 须要求 arr[p] <= v 时移动，而非 <
+ * 4. (l, p-1) == (l, r) 永不成立
+ *
+ * pivot 分割法 为什么不需要担心递归区间点问题？
+ *      因为除去 pivot 后，左右区间都必然比原区间小
+ *
+ * 区间法的交换效率（有效次数比）如何？
+ *      全部为必要交换
+ *
+ * 相比循环替换法
+ *      一次分区操作
+ *          分区法，不需要额外的临时变量帮助替换，少两次替换
+ *          分隔法，由于除去了分隔点，分得的区间总范围少 1
  */
 class Partition8 implements Partition {
 
