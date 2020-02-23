@@ -11,7 +11,7 @@ public class SolutionTest {
 
     static final Logger logger = LoggerFactory.getLogger(SolutionTest.class);
 
-    private final QuickSort quickSort = new Solution4();
+    private final QuickSort quickSort = new Solution5();
 
     private void printArray(int[] array) {
         logger.info("{}", array);
@@ -84,6 +84,18 @@ public class SolutionTest {
     @Test
     public void test8() {
         int[] arr = {3, 5, 5};
+        test(arr);
+    }
+
+    @Test
+    public void test9() {
+        int[] arr = {2, 1};
+        test(arr);
+    }
+
+    @Test
+    public void test10() {
+        int[] arr = {3, 2, 1};
         test(arr);
     }
 
