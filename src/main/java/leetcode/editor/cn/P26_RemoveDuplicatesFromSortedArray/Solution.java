@@ -62,42 +62,11 @@ class Solver1 implements Solver {
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-    private int partition(int[] nums, int l, int r) {
-        int p = l;
-        int q = r;
-        int v = nums[r];
-        while (p < q) {
-            while (p < q && nums[p] <= v) {
-                p++;
-            }
-            nums[q] = nums[p];
-
-            while (p < q && nums[q] > v) {
-                q--;
-            }
-            nums[p] = nums[q];
-        }
-        nums[q] = v;
-
-        return q;
-    }
-
-    private void sort(int[] nums, int l, int r) {
-        if (l >= r || l < 0 || r >= nums.length) {
-            return;
-        }
-
-        int i = partition(nums, l, r);
-        sort(nums, l, i - 1);
-        sort(nums, i + 1, r);
-    }
 
     public int removeDuplicates(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
-
-        sort(nums, 0, nums.length);
 
         int i = 0;
         int j = 1;
