@@ -67,4 +67,9 @@ public class Solution1 implements QuickSort {
         sort(nums, gt + 1, tail);
     }
 
+    @Override
+    public Partition getPartition() {
+        return null;
+    }
+
 }

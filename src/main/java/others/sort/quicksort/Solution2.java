@@ -113,4 +113,9 @@ public class Solution2 implements QuickSort {
         sort(arr, left, p - 1);
         sort(arr, p + 1, right);
     }
+
+    @Override
+    public Partition getPartition() {
+        return null;
+    }
 }

@@ -20,6 +20,7 @@ public class SolutionTest {
     private void test(int[] arr) {
         printArray(arr);
 
+        logger.info("solution={}, partition={}.", quickSort.getClass(), quickSort.getPartition().getClass());
         quickSort.sort(arr, 0, arr.length - 1);
         printArray(arr);
         for (int i = 0; i < arr.length - 1; i++) {
