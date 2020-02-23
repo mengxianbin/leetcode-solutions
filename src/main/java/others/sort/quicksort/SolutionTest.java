@@ -11,7 +11,7 @@ public class SolutionTest {
 
     static final Logger logger = LoggerFactory.getLogger(SolutionTest.class);
 
-    private final QuickSort quickSort = new Solution3();
+    private final QuickSort quickSort = new Solution4();
 
     private void printArray(int[] array) {
         logger.info("{}", array);
@@ -20,7 +20,7 @@ public class SolutionTest {
     private void test(int[] arr) {
         printArray(arr);
 
-        logger.info("solution={}, partition={}.", quickSort.getClass(), quickSort.getPartition().getClass());
+        logger.info("solution={}, partition={}.", quickSort.getClass(), quickSort.getPartition());
         quickSort.sort(arr, 0, arr.length - 1);
         printArray(arr);
         for (int i = 0; i < arr.length - 1; i++) {
@@ -50,4 +50,41 @@ public class SolutionTest {
         int[] arr = {22, 61, 50, 12, 88, 34, 31, 46, 27, 73,};
         test(arr);
     }
+
+    @Test
+    public void test3() {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9,};
+        test(arr);
+    }
+
+    @Test
+    public void test4() {
+        int[] arr = {5, 6, 3, 2, 5, 7, 4, 1, 8,};
+        test(arr);
+    }
+
+    @Test
+    public void test5() {
+        int[] arr = {11, 36, 71, 60, 99, 46, 34, 33, 43, 18,};
+        test(arr);
+    }
+
+    @Test
+    public void test6() {
+        int[] arr = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1,};
+        test(arr);
+    }
+
+    @Test
+    public void test7() {
+        int[] arr = {3, 1, 5};
+        test(arr);
+    }
+
+    @Test
+    public void test8() {
+        int[] arr = {3, 5, 5};
+        test(arr);
+    }
+
 }

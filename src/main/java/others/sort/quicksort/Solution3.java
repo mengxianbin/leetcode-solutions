@@ -5,6 +5,8 @@ import static others.sort.quicksort.Util.swap;
 
 /**
  * 单向分区
+ *
+ * 如何保证以 pivot 分割：最后额外 swap
  */
 class Partition1 implements Partition {
 
@@ -28,6 +30,8 @@ class Partition1 implements Partition {
 /**
  * 单向分区：取尾
  * 确保轴位最后交换
+ *
+ * 如何保证以 pivot 分割：单向，尾轴
  */
 class Partition6 implements Partition {
 
@@ -48,6 +52,9 @@ class Partition6 implements Partition {
 
 /**
  * 双向分区
+ *
+ * 如何保证以 pivot 分割： p, q 夹逼; p, q 都不判等; 置换游标 i 独立于 p, q
+ *      独立游标 i 的代价, 是 p, q 需要分别置换, 相较于 p q 相互置换 swap 次数更多
  */
 class Partition2 implements Partition {
 
@@ -75,6 +82,8 @@ class Partition2 implements Partition {
 
 /**
  * 交换分区
+ *
+ * 如何保证以 pivot 分割: 最后额外 swap
  */
 class Partition3 implements Partition {
 
@@ -101,6 +110,8 @@ class Partition3 implements Partition {
 
 /**
  * 最少交换分区
+ *
+ * 如何保证以 pivot 分割: 最后的 pivot 赋值
  */
 class Partition4 implements Partition {
 
@@ -128,6 +139,8 @@ class Partition4 implements Partition {
 
 /**
  * 最少交换分区：取头为轴
+ *
+ * 如何保证以 pivot 分割: 最后的 pivot 赋值
  */
 class Partition7 implements Partition {
 
@@ -156,6 +169,8 @@ class Partition7 implements Partition {
 
 /**
  * 多选轴分区
+ *
+ * 如何保证以 pivot 分割: 最后的 pivot 赋值
  */
 class Partition5 implements Partition {
 
@@ -194,11 +209,94 @@ class Partition5 implements Partition {
 }
 
 /**
- * 简单分区法
+ * for @Solution5: (l, i-1), (i, r)
+ * not for @Solution3: (l, i-1), (i, i), (i+1, r)
+ */
+class Partition8 implements Partition {
+
+    @Override
+    public int partition(int[] arr, int l, int r) {
+        int p = l;
+        int q = r;
+        int u = (l + r) / 2;
+
+        int v = arr[u];
+        arr[u] = arr[r];
+        arr[r] = v;
+
+        while (p < q) {
+            while (p < q && arr[p] <= v) {
+                p++;
+            }
+            while (p < q && arr[q] >= v) {
+                q--;
+            }
+            if (p < q) {
+                int t = arr[p];
+                arr[p] = arr[q];
+                arr[q] = t;
+            }
+        }
+
+        return p;
+    }
+}
+
+/**
+ * 区间法: (l, i-1), (i, r)
+ *
+ * Q1. 区间法是否可能死循环？
+ *      (l, i - 1) 一定是真子集，没问题；
+ *      分区点 i 为 0 时，会有问题
+ *          优先 p++ 时，分区点不可能恒为 0
+ *          优先 q-- 时，分区变为 (l, i) (i + 1, r)
+ *      所以，综合各种情况，不会死循环
+ *
+ * Q2. 区间法是否有必要？是否等价于排除 [l, i),[i, i],(i, r] 的方案？
+ *      以优先 p++ 为例，轴值必须置为序列尾部，以应对 p++ 直接到序列尾部到情况
+ *      分区结束时，arr[p] >= pivot 恒成立，分区为 (l, i-1), (i, r)
+ *
+ *          如果 p++ 首次直接到达序列尾部，p == i
+ *          如果 p++ 从未移动：此情况不可能为一次分区的最终状态
+ *          如果 p++ 到达序列中间停止，此时 arr[p] >= pivot
+ *              (l, i-1) 确认安全，那么 (i+1, l) >= arr[i] 是否成立？
+ *              如果成立，要求 arr[p] == pivot
+ *                  单向 p++，不存在 q-- 时，须要求 arr[p] < pivot, 而非 <=
+ *                  p, q 双向夹逼时，须要求 结束时做一次 swap(arr, q, r)
+ */
+class Solution5 implements QuickSort {
+
+    Partition partition = new Partition8();
+
+    @Override
+    public void sort(int[] arr, int l, int r) {
+        if (arr == null || arr.length < 2 || l >= r) {
+            return;
+        }
+
+        int i = partition.partition(arr, l, r);
+        sort(arr, l, i - 1);
+        sort(arr, i, r);
+    }
+
+    @Override
+    public Partition getPartition() {
+        return null;
+    }
+}
+
+/**
+ * pivot 分区法: [l, i),[i, i],(i, r]
+ *
+ * 总结 保证 pivot 为分区点位置的方法：
+ *      1. 单向迭代
+ *      2. 最终额外 swap
+ *      3. 左右夹逼，独立游标
+ *      4. 循环替换，首尾 pivot 赋值
  */
 public class Solution3 implements QuickSort {
 
-    Partition partition = new Partition5();
+    Partition partition = new Partition2();
 
     @Override
     public void sort(int[] arr, int l, int r) {
