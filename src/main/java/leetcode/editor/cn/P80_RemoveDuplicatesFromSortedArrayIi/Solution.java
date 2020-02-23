@@ -1,5 +1,5 @@
-//Given a sorted array nums, remove the duplicates in-place such that each eleme
-//nt appear only once and return the new length. 
+//Given a sorted array nums, remove the duplicates in-place such that duplicates
+// appeared at most twice and return the new length. 
 //
 // Do not allocate extra space for another array, you must do this by modifying 
 //the input array in-place with O(1) extra memory. 
@@ -7,20 +7,20 @@
 // Example 1: 
 //
 // 
-//Given nums = [1,1,2],
+//Given nums = [1,1,1,2,2,3],
 //
-//Your function should return length = 2, with the first two elements of nums be
-//ing 1 and 2 respectively.
+//Your function should return length = 5, with the first five elements of nums b
+//eing 1, 1, 2, 2 and 3 respectively.
 //
 //It doesn't matter what you leave beyond the returned length. 
 //
 // Example 2: 
 //
 // 
-//Given nums = [0,0,1,1,1,2,2,3,3,4],
+//Given nums = [0,0,1,1,1,1,2,3,3],
 //
-//Your function should return length = 5, with the first five elements of nums b
-//eing modified to 0, 1, 2, 3, and 4 respectively.
+//Your function should return length = 7, with the first seven elements of nums 
+//being modified to 0, 0, 1, 1, 2, 3 and 3 respectively.
 //
 //It doesn't matter what values are set beyond the returned length.
 // 
@@ -43,10 +43,12 @@
 //s.
 //for (int i = 0; i < len; i++) {
 //    print(nums[i]);
-//} Related Topics 数组 双指针
+//}
+// 
+// Related Topics 数组 双指针
 
 
-package leetcode.editor.cn.P26_RemoveDuplicatesFromSortedArray;
+package leetcode.editor.cn.P80_RemoveDuplicatesFromSortedArrayIi;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions.*;
@@ -60,21 +62,20 @@ class Solver1 implements Solver {
 }
 
 class Solution {
-
-
     public int removeDuplicates(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-
+        int count = 1;
         int i = 0;
-        int j = 1;
-        while (j < nums.length) {
+        for (int j = 1; j < nums.length; j++) {
             if (nums[j] != nums[i]) {
                 i++;
                 nums[i] = nums[j];
+                count = 1;
             }
-            j++;
+            else if (count < 2) {
+                i++;
+                nums[i] = nums[j];
+                count++;
+            }
         }
 
         return i + 1;
@@ -96,7 +97,7 @@ class SolutionTest {
         
     }
 
-    /* [1,1,2] */
+    /* [1,1,1,2,2,3] */
     @Test
     public void test1() {
         test();
