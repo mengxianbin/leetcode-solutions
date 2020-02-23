@@ -16,7 +16,7 @@ ${question.content}
 package leetcode.editor.cn.P${question.frontendQuestionId}_$!velocityTool.camelCaseName(${question.titleSlug});
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -32,19 +32,15 @@ class SolutionTest {
 
     private Solution solution = new Solution();
 
-    /**
-     * input: (expected, args...)
-     * solve: solution
-     * assert: equals(expected, actual)  
-     */
-    private void test() {
-        
+    private void test(int expected) {
+        int actual = solution.solve();
+        Assertions.assertEquals(expected, actual);
     }
 
     /* ${question.testCase} */
     @Test
     public void test1() {
-        test();
+        test(expected);
     }
 }
 ```
