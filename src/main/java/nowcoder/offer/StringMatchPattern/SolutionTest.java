@@ -16,4 +16,9 @@ class SolutionTest {
     public void test1() {
         test(true, "\",", ".*");
     }
+
+    @Test
+    public void test2() {
+        test(true, "", ".*");
+    }
 }
