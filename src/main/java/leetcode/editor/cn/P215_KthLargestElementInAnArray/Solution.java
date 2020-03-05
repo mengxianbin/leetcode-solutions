@@ -24,6 +24,8 @@ package leetcode.editor.cn.P215_KthLargestElementInAnArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.PriorityQueue;
+
 
 //leetcode submit region begin(Prohibit modification and deletion)
 interface Solver {
@@ -71,8 +73,7 @@ class Solver1 implements Solver {
         int i = partition(nums, l, r);
         if (i > k) {
             findK(nums, l, i - 1, k);
-        }
-        else if (i < k) {
+        } else if (i < k) {
             findK(nums, i + 1, r, k);
         }
     }
@@ -83,17 +84,6 @@ class Solver1 implements Solver {
             return 0;
         }
 
-        // PriorityQueue<Integer> queue = new PriorityQueue<Integer>((i,j)-> j-i);
-        // for (int n: nums) {
-        //     queue.offer(n);
-        // }
-
-        // int result = 0;
-        // for (int i = 0; i < k; i++) {
-        //     result = queue.poll();
-        // }
-        // return result;
-
         --k;
         if (k < 0 || k >= nums.length) {
             return 0;
@@ -102,6 +92,26 @@ class Solver1 implements Solver {
         findK(nums, 0, nums.length - 1, k);
 
         return nums[k];
+    }
+}
+
+class Solver2 implements Solver {
+
+    @Override
+    public int findKthLargest(int[] nums, int k) {
+        if (k <= 0 || nums.length < k) {
+            return 0;
+        }
+
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        for (int n : nums) {
+            queue.offer(n);
+            if (queue.size() > k) {
+                queue.poll();
+            }
+        }
+
+        return queue.peek();
     }
 }
 
