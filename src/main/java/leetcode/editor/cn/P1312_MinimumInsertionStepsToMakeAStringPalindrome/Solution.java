@@ -87,7 +87,7 @@ class Solution1 {
     public int minInsertions(String s) {
         int[][] dp = new int[s.length()][s.length()];
         for (int i = 0; i < s.length(); i++) {
-            for (int j = 0; j < s.length(); j++) {
+            for (int j = i; j < s.length(); j++) {
                 dp[i][j] = -1;
             }
         }
@@ -117,10 +117,35 @@ class Solution2 {
     }
 }
 
+class Solution3 {
+
+    public int minInsertions(String s) {
+        int[][] dp = new int[s.length()][s.length()];
+
+        for (int k = 0; k < s.length(); k++) {
+            dp[k][k] = 1;
+        }
+
+        for (int dis = 1; dis < s.length(); dis++) {
+            for (int i = 0; i + dis < s.length(); i++) {
+                int j = i + dis;
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                }
+                else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        return s.length() - dp[0][s.length() - 1];
+    }
+}
+
 class Solution {
 
     public int minInsertions(String s) {
-        return new Solution2().minInsertions(s);
+        return new Solution3().minInsertions(s);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
