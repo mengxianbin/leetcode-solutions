@@ -2,6 +2,8 @@
 
 ## Leetcode-Editor Plugin Configuration
 
+> https://github.com/shuzijun/leetcode-editor
+
 * CodeFileName
 
 ```shell script
@@ -18,29 +20,21 @@ package leetcode.editor.cn.P${question.frontendQuestionId}_$!velocityTool.camelC
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-interface Solver {
-}
-
-class Solver1 implements Solver {
-}
-
 ${question.code}
 
 class SolutionTest {
 
     private Solution solution = new Solution();
 
-    private void test(int expected) {
-        int actual = solution.solve();
+    private void test(int expected, int input) {
+        int actual = solution.solve(input);
         Assertions.assertEquals(expected, actual);
     }
 
     /* ${question.testCase} */
     @Test
     public void test1() {
-        test(expected);
+        test(expected, input);
     }
 }
 ```
