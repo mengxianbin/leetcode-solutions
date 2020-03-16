@@ -30,6 +30,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 //leetcode submit region begin(Prohibit modification and deletion)
+
+/**
+ * Solution     6ms
+ * Solution1    4ms
+ */
 class Solution1 {
     public String compressString(String S) {
         if (S == null || S.isEmpty()) {
