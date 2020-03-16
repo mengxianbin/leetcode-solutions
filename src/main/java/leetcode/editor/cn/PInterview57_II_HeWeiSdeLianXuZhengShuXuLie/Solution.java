@@ -28,7 +28,7 @@
 //
 
 
-package leetcode.editor.cn.P面试题57_II_HeWeiSdeLianXuZhengShuXuLieLcof;
+package leetcode.editor.cn.PInterview57_II_HeWeiSdeLianXuZhengShuXuLie;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

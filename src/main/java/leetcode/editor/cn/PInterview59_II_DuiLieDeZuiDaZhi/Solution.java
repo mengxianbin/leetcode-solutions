@@ -30,7 +30,7 @@
 // Related Topics 栈 Sliding Window
 
 
-package leetcode.editor.cn.P面试题59_II_DuiLieDeZuiDaZhiLcof;
+package leetcode.editor.cn.PInterview59_II_DuiLieDeZuiDaZhi;
 
 import java.util.Deque;
 import java.util.Queue;
@@ -66,12 +66,12 @@ class MaxQueue {
     }
 
     public int pop_front() {
-        if (queue.isEmpty()) {
+        Integer value = queue.poll();
+        if (value == null) {
             return -1;
         }
 
-        int value = queue.poll();
-        if (value == deque.peek()) {
+        if (value.equals(deque.peek())) {
             deque.poll();
         }
         return value;
