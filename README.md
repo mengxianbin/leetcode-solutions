@@ -23,11 +23,8 @@ import org.junit.jupiter.api.Assertions;
 ${question.code}
 
 class SolutionTest {
-
-    private Solution solution = new Solution();
-
     private void test(int expected, int input) {
-        int actual = solution.solve(input);
+        int actual = new Solution().solve(input);
         Assertions.assertEquals(expected, actual);
     }
 
