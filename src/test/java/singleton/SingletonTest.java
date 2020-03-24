@@ -63,19 +63,18 @@ public class SingletonTest {
 
     private void test(Class<?> klass, Function<Class<?>, Object> getter, boolean[] expected) {
         List<Throwable> throwableList = new ArrayList<>();
-        boolean[] actual = {true};
+        boolean[] result = {true};
         int[] index = {0};
         Consumer<Runnable> caller = runnable -> {
-            Throwable throwable = null;
+            boolean act = true;
             try {
                 runnable.run();
             } catch (Throwable t) {
                 throwableList.add(t);
-                throwable = t;
+                act = false;
             }
             boolean exp = expected[index[0]++];
-            boolean act = throwable == null;
-            actual[0] = actual[0] && (act == exp);
+            result[0] = result[0] && (act == exp);
             logger.info("Expected={}, Actual={}.", exp, act);
         };
 
@@ -86,7 +85,7 @@ public class SingletonTest {
         caller.accept(() -> testClassLoader(getter.apply(klass), getter));
 
         throwableList.forEach(e -> logger.error("", e));
-        Assertions.assertTrue(actual[0]);
+        Assertions.assertTrue(result[0]);
     }
 
     private void assertSingletonEquals(Object singleton1, Object singleton2, String msg) {
