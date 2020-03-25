@@ -21,8 +21,8 @@ public class SingletonClassLoader extends ClassLoader {
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         String classFilePath = getClassFilePath(name);
         byte[] bytes = getClassBytes(classFilePath);
-        Class<?> klass = defineClass(null, bytes, 0, bytes.length);
-        return klass != null ? klass : super.findClass(name);
+        Class<?> klass = bytes == null ? null : defineClass(null, bytes, 0, bytes.length);
+        return klass != null ? klass : getSystemClassLoader().loadClass(name);
     }
 
     private byte[] getClassBytes(String name) {
@@ -41,7 +41,7 @@ public class SingletonClassLoader extends ClassLoader {
 
             return outputStream.toByteArray();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return null;
         }
     }
 
