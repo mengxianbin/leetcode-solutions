@@ -118,7 +118,7 @@ class Solution1 {
 /**
  * Success:
  * Runtime:0 ms, faster than 100.00% of Java online submissions.
- * Memory Usage:37.2 MB, less than 5.40% of Java online submissions.
+ * Memory Usage:36.7 MB, less than 5.40% of Java online submissions.
  */
 class Solution {
     public int numRookCaptures(char[][] board) {
