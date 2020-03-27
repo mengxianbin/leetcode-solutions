@@ -141,7 +141,7 @@ public class SingletonTest {
 
     private void testDeserialize(Object singleton1) {
         logTestName("deserialize");
-        File file = new File("serialization");
+        File file = new File("target/serialization");
 
         try {
             // Write object
