@@ -23,12 +23,14 @@ import org.junit.jupiter.api.Assertions;
 ${question.code}
 
 class SolutionTest {
+
+    private InputParser parser = new InputParser();
+
     private void test(int expected, int input) {
         int actual = new Solution().solve(input);
         Assertions.assertEquals(expected, actual);
     }
 
-    /* ${question.testCase} */
     @Test
     public void test1() {
         test(expected, input);
