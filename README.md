@@ -17,6 +17,7 @@ ${question.content}
 
 package leetcode.editor.cn.P${question.frontendQuestionId}_$!velocityTool.camelCaseName(${question.titleSlug});
 
+import leetcode.editor.util.InputParser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
