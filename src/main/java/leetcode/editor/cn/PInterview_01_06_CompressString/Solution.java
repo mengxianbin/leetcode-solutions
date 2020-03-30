@@ -24,10 +24,7 @@
 // Related Topics 字符串
 
 
-package leetcode.editor.cn.PInterview0106_CompressString;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+package leetcode.editor.cn.PInterview_01_06_CompressString;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 

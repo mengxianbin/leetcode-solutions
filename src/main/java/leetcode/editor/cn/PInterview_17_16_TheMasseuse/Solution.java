@@ -28,7 +28,7 @@
 // Related Topics 动态规划
 
 
-package leetcode.editor.cn.PInterview1716_TheMasseuse;
+package leetcode.editor.cn.PInterview_17_16_TheMasseuse;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

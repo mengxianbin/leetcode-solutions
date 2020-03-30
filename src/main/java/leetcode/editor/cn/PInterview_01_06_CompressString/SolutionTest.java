@@ -1,4 +1,4 @@
-package leetcode.editor.cn.PInterview0106_CompressString;
+package leetcode.editor.cn.PInterview_01_06_CompressString;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

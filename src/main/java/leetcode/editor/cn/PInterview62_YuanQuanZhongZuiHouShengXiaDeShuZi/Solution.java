@@ -27,7 +27,7 @@
 //
 
 
-package leetcode.editor.cn.P面试题62_YuanQuanZhongZuiHouShengXiaDeShuZiLcof;
+package leetcode.editor.cn.PInterview62_YuanQuanZhongZuiHouShengXiaDeShuZi;
 
 import leetcode.editor.util.InputParser;
 import org.junit.jupiter.api.Assertions;
