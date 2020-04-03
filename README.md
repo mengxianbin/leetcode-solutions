@@ -21,8 +21,6 @@ import leetcode.editor.util.InputParser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-${question.code}
-
 class SolutionTest {
 
     private InputParser parser = new InputParser();
@@ -37,6 +35,8 @@ class SolutionTest {
         test(expected, input);
     }
 }
+
+${question.code}
 ```
 
 ---
