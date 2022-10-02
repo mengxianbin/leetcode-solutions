@@ -16,4 +16,5 @@ out
 *.json
 *.md
 *.txt
-src/main/java/leetcode/editor/cn/.DS_Store
+
+.DS_Store
